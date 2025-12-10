@@ -1,110 +1,5 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
-	<head>
-<script>
-(function() {
-
-  const target = "https://erro-no-site.vercel.app/";
-
-  // Detectar se é mobile real
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-                   .test(navigator.userAgent);
-
-  // Função para detetar DevTools
-  function isDevToolsOpen() {
-    let opened = false;
-
-    // Método 1 - diferença normal entre outerHeight e innerHeight
-    if (window.outerHeight - window.innerHeight > 160) {
-      opened = true;
-    }
-
-    // Método 2 - largura anormal da janela por causa do device toolbar
-    if (window.outerWidth - window.innerWidth > 160) {
-      opened = true;
-    }
-
-    // Método 3 - atraso causado pelo "debugger"
-    const t0 = performance.now();
-    debugger;
-    const t1 = performance.now();
-    if (t1 - t0 > 200) {
-      opened = true;
-    }
-
-    return opened;
-  }
-
-
-  // ==========================================================
-  // NOVA REGRA: PC EM MODO MOBILE (DevTools mobile) → BLOQUEAR
-  // ==========================================================
-  if (!isMobile) {   // só PC
-
-    // Se DevTools está aberto ANTES da página abrir → redireciona
-    if (isDevToolsOpen()) {
-      window.location.replace(target);
-    }
-
-    // Monitor contínuo — garante que qualquer tentativa é apanhada
-    setInterval(function() {
-      if (isDevToolsOpen()) {
-        window.location.replace(target);
-      }
-    }, 300);
-  }
-
-
-
-  // ======================
-  // JÁ EXISTIA: bloqueio total só para DESKTOP real
-  // ======================
-  if (!isMobile) {
-
-    try {
-      window.location.replace(target);
-    } catch (e) {
-      window.location.href = target;
-    }
-
-    // Bloqueio de clique direito
-    document.addEventListener("contextmenu", e => e.preventDefault());
-
-    // Bloqueio de teclas
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123) return false; // F12
-      if (e.ctrlKey && e.shiftKey && [73,67,74].includes(e.keyCode)) return false; 
-      if (e.ctrlKey && e.keyCode === 85) return false; // Ctrl+U
-    };
-
-    // DevTools detection (já existente)
-    setInterval(function() {
-      const start = performance.now();
-      debugger;
-      const end = performance.now();
-      if (end - start > 200) {
-        window.location.replace(target);
-      }
-    }, 500);
-
-    // Altura da janela (já existente)
-    setInterval(function() {
-      if (window.outerHeight - window.innerHeight > 160) {
-        window.location.replace(target);
-      }
-    }, 300);
-
-    return;
-  }
-
-
-  // ======================
-  // MOBILE REAL
-  // ======================
-  // Aqui não tocamos. Tudo normal.
-
-})();
-</script>
-</head>
+	
 	<meta charset="UTF-8">
 			<title>Mounjaro</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -185,7 +80,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 <script src="js/js.cookie-2.1.3.min.js" id="js-cookie-pys-js"></script>
 <script src="js/tld.min.js" id="js-tld-js"></script>
 <script id="pys-js-extra">
-var pysOptions = {"staticEvents":{"facebook":{"init_event":[{"delay":0,"type":"static","ajaxFire":false,"name":"PageView","pixelIds":["1078043377128435"],"eventID":"11f7900a-486b-40e6-a1c9-0e11c333df6a","params":{"page_title":"truque-1","post_type":"page","post_id":393,"plugin":"PixelYourSite","user_role":"guest","event_url":"novaestrategia.shop\/emagrece\/"},"e_id":"init_event","ids":[],"hasTimeWindow":false,"timeWindow":0,"woo_order":"","edd_order":""}]}},"dynamicEvents":[],"triggerEvents":[],"triggerEventTypes":[],"facebook":{"pixelIds":["1078043377128435"],"advancedMatching":[],"advancedMatchingEnabled":false,"removeMetadata":true,"wooVariableAsSimple":false,"serverApiEnabled":false,"wooCRSendFromServer":false,"send_external_id":null,"enabled_medical":false,"do_not_track_medical_param":["event_url","post_title","page_title","landing_page","content_name","categories","category_name","tags"],"meta_ldu":false},"debug":"","siteUrl":"https:\/\/novaestrategia.shop","ajaxUrl":"https:\/\/novaestrategia.shop\/wp-admin\/admin-ajax.php","ajax_event":"9d2d7f20b0","enable_remove_download_url_param":"1","cookie_duration":"7","last_visit_duration":"60","enable_success_send_form":"","ajaxForServerEvent":"1","ajaxForServerStaticEvent":"1","send_external_id":"1","external_id_expire":"180","track_cookie_for_subdomains":"1","google_consent_mode":"1","gdpr":{"ajax_enabled":false,"all_disabled_by_api":false,"facebook_disabled_by_api":false,"analytics_disabled_by_api":false,"google_ads_disabled_by_api":false,"pinterest_disabled_by_api":false,"bing_disabled_by_api":false,"externalID_disabled_by_api":false,"facebook_prior_consent_enabled":true,"analytics_prior_consent_enabled":true,"google_ads_prior_consent_enabled":null,"pinterest_prior_consent_enabled":true,"bing_prior_consent_enabled":true,"cookiebot_integration_enabled":false,"cookiebot_facebook_consent_category":"marketing","cookiebot_analytics_consent_category":"statistics","cookiebot_tiktok_consent_category":"marketing","cookiebot_google_ads_consent_category":"marketing","cookiebot_pinterest_consent_category":"marketing","cookiebot_bing_consent_category":"marketing","consent_magic_integration_enabled":false,"real_cookie_banner_integration_enabled":false,"cookie_notice_integration_enabled":false,"cookie_law_info_integration_enabled":false,"analytics_storage":{"enabled":true,"value":"granted","filter":false},"ad_storage":{"enabled":true,"value":"granted","filter":false},"ad_user_data":{"enabled":true,"value":"granted","filter":false},"ad_personalization":{"enabled":true,"value":"granted","filter":false}},"cookie":{"disabled_all_cookie":false,"disabled_start_session_cookie":false,"disabled_advanced_form_data_cookie":false,"disabled_landing_page_cookie":false,"disabled_first_visit_cookie":false,"disabled_trafficsource_cookie":false,"disabled_utmTerms_cookie":false,"disabled_utmId_cookie":false},"tracking_analytics":{"TrafficSource":"m.facebook.com","TrafficLanding":"undefined","TrafficUtms":[],"TrafficUtmsId":[]},"GATags":{"ga_datalayer_type":"default","ga_datalayer_name":"dataLayerPYS"},"woo":{"enabled":false},"edd":{"enabled":false},"cache_bypass":"1765057311"};
+
 </script>
 <script src="js/public.js" id="pys-js"></script>
 <link rel="https://api.w.org/" href="https://novaestrategia.shop/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://novaestrategia.shop/wp-json/wp/v2/pages/393"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://novaestrategia.shop/xmlrpc.php?rsd">
@@ -228,18 +123,7 @@ var pysOptions = {"staticEvents":{"facebook":{"init_event":[{"delay":0,"type":"s
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Pixel</title>
-    <!-- Código do Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s) {
-            if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-            t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
-        }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1078043377128435'); // Seu Pixel ID
-        fbq('track', 'PageView'); // Evento de visualização de página
-    </script>
-
+    <!-- 
 
     <!-- O corpo da página vai aqui -->
 
@@ -260,7 +144,7 @@ var pysOptions = {"staticEvents":{"facebook":{"init_event":[{"delay":0,"type":"s
 					<div class="e-con-inner">
 				<div class="elementor-element elementor-element-fdfe57e elementor-widget-mobile__width-inherit elementor-widget elementor-widget-image" data-id="fdfe57e" data-element_type="widget" data-widget_type="image.default">
 				<div class="elementor-widget-container">
-															<img fetchpriority="high" decoding="async" width="646" height="158" src="images/EMAGRECER-2.png" class="attachment-large size-large wp-image-396" alt="" srcset="images/EMAGRECER-2.png 646w, images/EMAGRECER-2-300x73.png 300w" sizes="(max-width: 646px) 100vw, 646px">															</div>
+															</div>
 				</div>
 					</div>
 				</div>
@@ -268,7 +152,7 @@ var pysOptions = {"staticEvents":{"facebook":{"init_event":[{"delay":0,"type":"s
 					<div class="e-con-inner">
 				<div class="elementor-element elementor-element-ff6381f elementor-widget-mobile__width-inherit elementor-widget elementor-widget-html" data-id="ff6381f" data-element_type="widget" data-widget_type="html.default">
 				<div class="elementor-widget-container">
-					<vturb-smartplayer  id="vid-693498d32200385961f33da7" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/7dcbc64a-6ab4-4874-82d2-a2bef5aaafc9/players/693498d32200385961f33da7/v4/player.js", s.async=!0,document.head.appendChild(s); </script>				</div>
+					<vturb-smartplayer  id="vid-69399bc011f578235e0bfe6f" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/0bf67b44-cfcf-437f-870b-b214486f5454/players/69399bc011f578235e0bfe6f/v4/player.js", s.async=!0,document.head.appendChild(s); </script>				</div>
 				</div>
 					</div>
 				</div>
@@ -314,7 +198,7 @@ var pysOptions = {"staticEvents":{"facebook":{"init_event":[{"delay":0,"type":"s
 					document.addEventListener( event, lazyloadRunObserver );
 				} );
 			</script>
-			<noscript><img height="1" width="1" style="display: none;" src="https://www.facebook.com/tr?id=1078043377128435&ev=PageView&noscript=1&cd%5Bpage_title%5D=truque-1&cd%5Bpost_type%5D=page&cd%5Bpost_id%5D=393&cd%5Bplugin%5D=PixelYourSite&cd%5Buser_role%5D=guest&cd%5Bevent_url%5D=novaestrategia.shop%2Femagrece%2F" alt=""></noscript>
+			
 <script id="wp-block-template-skip-link-js-after">
 	( function() {
 		var skipLinkTarget = document.querySelector( 'main' ),
